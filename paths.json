@@ -1,0 +1,7 @@
+{
+    "auth" : {
+        "login":"/login", 
+        "register":"/register", 
+        "enable_figata": true
+    }   
+}
