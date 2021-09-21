@@ -4,9 +4,24 @@
         "https://api2.binance.com",
         "https://api3.binance.com"
     ],
-    "auth" : {
-        "login":"/login", 
-        "register":"/register", 
-        "enable_figata": true
-    }   
+    "account": {
+        "accountStatus": "/sapi/v1/account/status",
+        "accountApiTradingStatus": "/sapi/v1/account/apiTradingStatus",
+        "apiKeyPermission": "/sapi/v1/account/apiRestrictions"
+    },
+    "asset":{
+        "dustTransfer": "/sapi/v1/asset/dust",
+        "assetDividendRecord": "/sapi/v1/asset/assetDividend",
+        "assetDetail": "/sapi/v1/asset/assetDetail",
+        "tradeFee": "/sapi/v1/asset/tradeFee",
+        "userUniversalTransfer": "/sapi/v1/asset/transfer",
+        "transferHistoryQuery": "/sapi/v1/asset/transfer",
+        "fundingWallet": "/sapi/v1/asset/get-funding-asset"
+    },
+    "wallet": {
+        "withdraw": "/sapi/v1/capital/withdraw/apply",
+        "deposit": "/sapi/v1/capital/deposit/hisrec",
+        "withdrawHistory": "/sapi/v1/capital/withdraw/history",
+        "depositAddress": "/sapi/v1/capital/deposit/address"
+    }
 }
