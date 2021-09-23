@@ -22,27 +22,3 @@ func (c *Client) systemStatus() string {
     defer res.Body.Close()
     return string(body)
 }
-
-type Paths struct {
-	APIURL  []string `json:"api_url"`
-	Account struct {
-		AccountStatus           string `json:"accountStatus"`
-		AccountAPITradingStatus string `json:"accountApiTradingStatus"`
-		APIKeyPermission        string `json:"apiKeyPermission"`
-	} `json:"account"`
-	Asset struct {
-		DustTransfer          string `json:"dustTransfer"`
-		AssetDividendRecord   string `json:"assetDividendRecord"`
-		AssetDetail           string `json:"assetDetail"`
-		TradeFee              string `json:"tradeFee"`
-		UserUniversalTransfer string `json:"userUniversalTransfer"`
-		TransferHistoryQuery  string `json:"transferHistoryQuery"`
-		FundingWallet         string `json:"fundingWallet"`
-	} `json:"asset"`
-	Wallet struct {
-		Withdraw        string `json:"withdraw"`
-		Deposit         string `json:"deposit"`
-		WithdrawHistory string `json:"withdrawHistory"`
-		DepositAddress  string `json:"depositAddress"`
-	} `json:"wallet"`
-}

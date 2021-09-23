@@ -23,5 +23,12 @@
         "deposit": "/sapi/v1/capital/deposit/hisrec",
         "withdrawHistory": "/sapi/v1/capital/withdraw/history",
         "depositAddress": "/sapi/v1/capital/deposit/address"
+    },
+    "spot": {
+        "newOrder": "/api/v3/order",
+        "cancelOrder": "/api/v3/order",
+        "openOrders": "/api/v3/openOrders",
+        "queryOrder": "/api/v3/order",
+        "allOrders": "/api/v3/allOrders"
     }
 }

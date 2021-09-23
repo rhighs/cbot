@@ -4,6 +4,7 @@ import (
     "fmt"
     "time"
     "strconv"
+    "io/ioutil"
     "encoding/hex"
     "errors"
     "encoding/json"
@@ -44,8 +45,7 @@ func (c *Client) do(method string, path string, payload string, isAuth bool, res
     if err != nil {
         return
     }
-
-    req.Response.Header.Add("Accept", "application/json")
+    req.Header.Add("Accept", "application/json")
 
     if isAuth {
         req.Header.Add("X-MBX-APIKEY", c.apiKey)
@@ -64,15 +64,19 @@ func (c *Client) do(method string, path string, payload string, isAuth bool, res
         req.URL.RawQuery = queryString.Encode() + "&signature"  + signature
     }
 
-    //err and resoruce handling
-    defer res.Body.Close()
     res, err = c.httpClient.Do(req)
-    if res.StatusCode != 200 {
-        _, err = fmt.Printf("Bad status code on client request...")
-    }
-
     if err != nil {
         return
+    }
+    defer res.Body.Close()
+    
+    if res.StatusCode != 200 {
+        str, err := ioutil.ReadAll(res.Body)
+        if err != nil {
+            panic(err)
+        }
+        fmt.Printf(string(str))
+        _, err = fmt.Printf("Bad status code on client request...")
     }
 
     if res != nil {
