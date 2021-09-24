@@ -51,8 +51,8 @@ func (c *Client) do(method string, path string, payload string, isAuth bool, res
 		queryString := req.URL.Query()
 		totalParams := queryString.Encode() + payload
 		timestamp := time.Now().Unix() * 1000
-        fmt.Printf(queryString.Encode())
-		queryString.Set("timestamp", strconv.FormatInt(timestamp * 1000, 10))
+		fmt.Printf(queryString.Encode())
+		queryString.Set("timestamp", strconv.FormatInt(timestamp*1000, 10))
 
 		mac := hmac.New(sha256.New, []byte(c.apiSecret)) //secret is the key of the cryptographic message
 		_, err = mac.Write([]byte(totalParams))          //write totalParams
@@ -61,7 +61,7 @@ func (c *Client) do(method string, path string, payload string, isAuth bool, res
 		}
 
 		signature := hex.EncodeToString(mac.Sum(nil))
-        fmt.Printf(signature)
+		fmt.Printf("La signature è:" + signature + "\n")
 		req.URL.RawQuery = queryString.Encode() + "&signature" + signature
 	}
 
@@ -83,10 +83,10 @@ func (c *Client) do(method string, path string, payload string, isAuth bool, res
 	if res != nil {
 		decoder := json.NewDecoder(res.Body)
 		str, err := ioutil.ReadAll(res.Body)
-        if err != nil {
-            panic(err)
-        }
-        fmt.Printf(string(str))
+		if err != nil {
+			panic(err)
+		}
+		fmt.Printf(string(str))
 		err = decoder.Decode(result)
 	}
 	return

@@ -7,8 +7,8 @@ import (
 )
 
 var URL string = "https://httpbin.org/post"
-var TEST_API_KEY = "vmPUZE6mv9SD5VNHk4HlWFsOr6aKE2zvsw0MuIgwCIPy6utIco14y7Ju91duEh8A"
-var TEST_API_SECRET = "NhqPtmdSJYdKjVHjA7PZj4Mge3R5YNiP1e3UZjInClVN65XAbvqqM6A7H5fATj0j"
+var TEST_API_KEY = "8jFR3cMWfCWTLcBf01eyD523F38qUaTunv12dax8YJS6cOhVQerN5sJXgZOSNxQL"
+var TEST_API_SECRET = "sdYR2qyhhcNhMXy63K0ZohjwIQL7bCzkzsWT9PglcDaChHiDPzLY1hQRpfBgAPwT"
 
 type Res struct {
 	Mins  int64  `json:"mins"`
@@ -21,8 +21,8 @@ func main() {
 		panic(err)
 	}
 
-    resp := client.accountInfo()
-    fmt.Printf("%+v\n", resp)
+	resp := client.accountInfo()
+	fmt.Printf("%+v\n", resp)
 }
 
 func PostTest() string {

@@ -3,10 +3,10 @@ package main
 import (
 	"cbot/responses" //gotta specify the mod name
 	"encoding/json"
+	"fmt"
 	"io/ioutil"
 	"strconv"
 	"time"
-    "fmt"
 )
 
 func (c *Client) systemStatus() string {
@@ -35,10 +35,12 @@ func (c *Client) accountInfo() responses.AccountInfo {
 		panic(err)
 	}
 
-    fmt.Printf(paths.Account.AccountInfo)
+	fmt.Printf(paths.Account.AccountInfo)
 
 	err = json.Unmarshal([]byte(file), &paths)
-	c.do("GET", "/api/v3/account"+"?timestamp="+strconv.FormatInt(time.Now().Unix(), 10), "", true, &resp)
+	timestamp := strconv.FormatInt(time.Now().Unix(), 10)
+	fmt.Printf("Il timestamp è: " + timestamp)
+	c.do("GET", "/api/v3/account"+"?timestamp="+timestamp+"&recvWindow=5000", "", true, &resp)
 
 	return resp
 }
