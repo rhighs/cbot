@@ -10,7 +10,6 @@ import (
 	"io/ioutil"
 	"net/http"
 	"strconv"
-	"strings"
 	"time"
 )
 
@@ -47,16 +46,13 @@ func (c *Client) do(method string, path string, payload string, isAuth bool, res
 	}
 	req.Header.Add("Accept", "application/json")
 
-	if method == "GET" && len(strings.Split(path, "?")) > 1 {
-		payload = strings.Split(path, "?")[1]
-	}
-
 	if isAuth {
 		req.Header.Add("X-MBX-APIKEY", c.apiKey)
 		queryString := req.URL.Query()
 		totalParams := queryString.Encode() + payload
 		timestamp := time.Now().Unix() * 1000
-		queryString.Set("timestamp", strconv.FormatInt(timestamp, 10))
+        fmt.Printf(queryString.Encode())
+		queryString.Set("timestamp", strconv.FormatInt(timestamp * 1000, 10))
 
 		mac := hmac.New(sha256.New, []byte(c.apiSecret)) //secret is the key of the cryptographic message
 		_, err = mac.Write([]byte(totalParams))          //write totalParams
@@ -65,6 +61,7 @@ func (c *Client) do(method string, path string, payload string, isAuth bool, res
 		}
 
 		signature := hex.EncodeToString(mac.Sum(nil))
+        fmt.Printf(signature)
 		req.URL.RawQuery = queryString.Encode() + "&signature" + signature
 	}
 
@@ -72,7 +69,7 @@ func (c *Client) do(method string, path string, payload string, isAuth bool, res
 	if err != nil {
 		return
 	}
-	//defer res.Body.Close()
+	defer res.Body.Close()
 
 	if res.StatusCode != 200 {
 		str, err := ioutil.ReadAll(res.Body)
@@ -85,6 +82,11 @@ func (c *Client) do(method string, path string, payload string, isAuth bool, res
 
 	if res != nil {
 		decoder := json.NewDecoder(res.Body)
+		str, err := ioutil.ReadAll(res.Body)
+        if err != nil {
+            panic(err)
+        }
+        fmt.Printf(string(str))
 		err = decoder.Decode(result)
 	}
 	return

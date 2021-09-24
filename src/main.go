@@ -21,12 +21,8 @@ func main() {
 		panic(err)
 	}
 
-	resp := client.accountInfo()
-	fmt.Printf("%+v\n", resp)
-	/*
-	   client.do("GET", "/api/v3/avgPrice?symbol=BTCEUR", "", false, &res)
-	   fmt.Printf("mins: " +  strconv.FormatInt(res.Mins, 10) + " | symbol: " + res.Price + "\n")
-	*/
+    resp := client.accountInfo()
+    fmt.Printf("%+v\n", resp)
 }
 
 func PostTest() string {
