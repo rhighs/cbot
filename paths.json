@@ -7,7 +7,8 @@
     "account": {
         "accountStatus": "/sapi/v1/account/status",
         "accountApiTradingStatus": "/sapi/v1/account/apiTradingStatus",
-        "apiKeyPermission": "/sapi/v1/account/apiRestrictions"
+        "apiKeyPermission": "/sapi/v1/account/apiRestrictions",
+        "accountInfo": "/api/v3/account"
     },
     "asset":{
         "dustTransfer": "/sapi/v1/asset/dust",
@@ -22,7 +23,7 @@
         "withdraw": "/sapi/v1/capital/withdraw/apply",
         "deposit": "/sapi/v1/capital/deposit/hisrec",
         "withdrawHistory": "/sapi/v1/capital/withdraw/history",
-        "depositAddress": "/sapi/v1/capital/deposit/address"
+        "depositAddress": "/sapi/v1/capital/deposit/address",
     },
     "spot": {
         "newOrder": "/api/v3/order",

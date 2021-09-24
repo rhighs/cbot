@@ -1,21 +1,21 @@
 package responses
 
 type Withdraw struct {
-    Id string `json:"id"`
+	Id string `json:"id"`
 }
 
 type Deposit struct {
-	Amount        string `json:"amount"`       
-	Coin          string `json:"coin"`         
-	Network       string `json:"network"`      
-	Status        int64  `json:"status"`       
-	Address       string `json:"address"`      
-	AddressTag    string `json:"addressTag"`   
-	TxID          string `json:"txId"`         
-	InsertTime    int64  `json:"insertTime"`   
-	TransferType  int64  `json:"transferType"` 
+	Amount        string `json:"amount"`
+	Coin          string `json:"coin"`
+	Network       string `json:"network"`
+	Status        int64  `json:"status"`
+	Address       string `json:"address"`
+	AddressTag    string `json:"addressTag"`
+	TxID          string `json:"txId"`
+	InsertTime    int64  `json:"insertTime"`
+	TransferType  int64  `json:"transferType"`
 	UnlockConfirm string `json:"unlockConfirm"`
-	ConfirmTimes  string `json:"confirmTimes"` 
+	ConfirmTimes  string `json:"confirmTimes"`
 }
 
 type WithdrawHistory struct {
@@ -41,7 +41,25 @@ type DepositAddress struct {
 }
 
 type AccountStatus struct {
-    Data string `json:"data"`
+	Data string `json:"data"`
+}
+
+type AccountInfo struct {
+	MakerCommission  int    `json:"makerCommission"`
+	TakerCommission  int    `json:"takerCommission"`
+	BuyerCommission  int    `json:"buyerCommission"`
+	SellerCommission int    `json:"sellerCommission"`
+	CanTrade         bool   `json:"canTrade"`
+	CanWithdraw      bool   `json:"canWithdraw"`
+	CanDeposit       bool   `json:"canDeposit"`
+	UpdateTime       int    `json:"updateTime"`
+	AccountType      string `json:"accountType"`
+	Balances         []struct {
+		Asset  string `json:"asset"`
+		Free   string `json:"free"`
+		Locked string `json:"locked"`
+	} `json:"balances"`
+	Permissions []string `json:"permissions"`
 }
 
 type ApiTradingStatus struct {
