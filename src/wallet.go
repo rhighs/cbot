@@ -5,8 +5,6 @@ import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
-	"strconv"
-	"time"
 )
 
 func (c *Client) systemStatus() string {
@@ -16,8 +14,8 @@ func (c *Client) systemStatus() string {
 	if err != nil {
 		panic(err)
 	}
-	err = json.Unmarshal([]byte(file), paths)
-	res := c.do("GET", paths.Account.AccountStatus, "", true, &resp)
+	err = json.Unmarshal([]byte(file), &paths)
+	res := c.do("GET", paths.Account.AccountStatus, true, &resp)
 	body, err := ioutil.ReadAll(res.Body)
 	if err != nil {
 		panic(err)
@@ -38,9 +36,7 @@ func (c *Client) accountInfo() responses.AccountInfo {
 	fmt.Printf(paths.Account.AccountInfo)
 
 	err = json.Unmarshal([]byte(file), &paths)
-	timestamp := strconv.FormatInt(time.Now().Unix(), 10)
-	fmt.Printf("Il timestamp è: " + timestamp)
-	c.do("GET", "/api/v3/account"+"?timestamp="+timestamp+"&recvWindow=5000", "", true, &resp)
+	c.do("GET", "/api/v3/account", true, &resp)
 
 	return resp
 }
