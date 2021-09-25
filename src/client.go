@@ -37,7 +37,7 @@ func NewClient(apiKey string, apiSecret string) (c *Client, err error) {
 * "member function"
 * inspired by: https://github.com/pdepip/go-binance/blob/master/binance/client.go
  */
-func (c *Client) do(method string, path string, payload string, isAuth bool, result interface{}) (res *http.Response) {
+func (c *Client) do(method string, path string, isAuth bool, result interface{}) (res *http.Response) {
 
 	fullUrl := "https://api1.binance.com" + path //path should include the query string
 	req, err := http.NewRequest(method, fullUrl, nil)
@@ -49,20 +49,18 @@ func (c *Client) do(method string, path string, payload string, isAuth bool, res
 	if isAuth {
 		req.Header.Add("X-MBX-APIKEY", c.apiKey)
 		queryString := req.URL.Query()
-		totalParams := queryString.Encode() + payload
+
 		timestamp := time.Now().Unix() * 1000
-		fmt.Printf(queryString.Encode())
-		queryString.Set("timestamp", strconv.FormatInt(timestamp*1000, 10))
+		queryString.Set("timestamp", strconv.FormatInt(timestamp, 10))
 
 		mac := hmac.New(sha256.New, []byte(c.apiSecret)) //secret is the key of the cryptographic message
-		_, err = mac.Write([]byte(totalParams))          //write totalParams
+		_, err = mac.Write([]byte(queryString.Encode())) //write totalParams
 		if err != nil {
 			return
 		}
 
 		signature := hex.EncodeToString(mac.Sum(nil))
-		fmt.Printf("La signature è:" + signature + "\n")
-		req.URL.RawQuery = queryString.Encode() + "&signature" + signature
+		req.URL.RawQuery = queryString.Encode() + "&signature=" + signature
 	}
 
 	res, err = c.httpClient.Do(req)
@@ -77,7 +75,7 @@ func (c *Client) do(method string, path string, payload string, isAuth bool, res
 			panic(err)
 		}
 		fmt.Printf(string(str))
-		_, err = fmt.Printf("Bad status code on client request...")
+		_, err = fmt.Printf("Status code " + strconv.FormatInt(int64(res.StatusCode), 10) + " on client request...\n")
 	}
 
 	if res != nil {
