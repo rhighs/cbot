@@ -38,7 +38,6 @@ func NewClient(apiKey string, apiSecret string) (c *Client, err error) {
 * inspired by: https://github.com/pdepip/go-binance/blob/master/binance/client.go
  */
 func (c *Client) do(method string, path string, isAuth bool, result interface{}) (res *http.Response) {
-
 	fullUrl := "https://api1.binance.com" + path //path should include the query string
 	req, err := http.NewRequest(method, fullUrl, nil)
 	if err != nil {
