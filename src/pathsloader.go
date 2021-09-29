@@ -51,4 +51,7 @@ type Paths struct {
 		QueryOrder  string `json:"queryOrder"`
 		AllOrders   string `json:"allOrders"`
 	}
+	Ticker struct {
+		PriceTicker string `json:"priceTicker"`
+	} `json:"ticker"`
 }

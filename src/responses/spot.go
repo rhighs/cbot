@@ -84,6 +84,12 @@ type OrderReport struct {
 	IcebergQty          string `json:"icebergQty"`
 }
 
+type PriceTicker struct {
+	Symbol string `json:"symbol"`
+	Price  string `json:"price"`
+	Time   int64  `json:"time"`
+}
+
 type QueryOrder struct {
 	Symbol              string `json:"symbol"`             
 	OrderID             int64  `json:"orderId"`            

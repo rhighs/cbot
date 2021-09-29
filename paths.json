@@ -31,5 +31,8 @@
         "openOrders": "/api/v3/openOrders",
         "queryOrder": "/api/v3/order",
         "allOrders": "/api/v3/allOrders"
+    },
+    "ticker": {
+        "priceTicker": "/fapi/v1/ticker/price"
     }
 }

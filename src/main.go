@@ -32,7 +32,10 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
+	balance := client.accountInfo()
+	fmt.Printf("%+v\n", balance)
 
-	resp := client.accountInfo()
-	fmt.Printf("%+v\n", resp)
+	priceOfAllCrypto := client.fetchTicker()
+	fmt.Printf("%+v\n", priceOfAllCrypto)
+
 }

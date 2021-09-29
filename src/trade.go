@@ -11,3 +11,9 @@ func (c *Client) PlaceLimitOrder() responses.NewOrderFull {
     ioutil.ReadAll(resp.Body)
     return result
 }
+
+func (c *Client) fetchTicker() responses.PriceTicker {
+    var result responses.PriceTicker
+    c.do("GET", "/fapi/v1/ticker/price", false, &result)
+    return result
+}
