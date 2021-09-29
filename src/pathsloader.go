@@ -1,24 +1,24 @@
-package main
+    package main
 
 import (
-	"encoding/json"
-	"io/ioutil"
+    "encoding/json"
+    "io/ioutil"
 )
 
 func ParseJson(filePath string) Paths {
-	var paths Paths
-	file, err := ioutil.ReadFile(filePath)
-	if err != nil {
-		panic(err)
-	}
-	err = json.Unmarshal([]byte(file), paths)
-	return paths
+    var paths Paths
+    file, err := ioutil.ReadFile(filePath)
+    if err != nil {
+        panic(err)
+    }
+    err = json.Unmarshal([]byte(file), paths)
+    return paths
 }
 
 var paths Paths
 
 func init() {
-	paths = ParseJson("../paths.json")
+    paths = ParseJson("../paths.json")
 }
 
 type Paths struct {
@@ -50,7 +50,8 @@ type Paths struct {
 		OpenOrders  string `json:"openOrders"`
 		QueryOrder  string `json:"queryOrder"`
 		AllOrders   string `json:"allOrders"`
-	}
+	}`json:"spot"`
+
 	Ticker struct {
 		PriceTicker string `json:"priceTicker"`
 	} `json:"ticker"`
